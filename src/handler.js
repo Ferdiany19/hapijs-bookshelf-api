@@ -76,6 +76,20 @@ const addBooksHandler = (request, h) => {
 
 //   GET SECTION
 const getBooksHandler = (request, h) => {
+  const { reading } = request.query;
+  if (reading !== undefined) {
+    const parsing = parseInt(reading, 2) === 1;
+    const filteredBooks = books.filter((book) => book.reading === parsing);
+    const customBooks = {
+      status: "success",
+      data: {
+        books: filteredBooks.map((book) => {
+          return { id: book.id, name: book.name, publisher: book.publisher };
+        }),
+      },
+    };
+    return h.response(customBooks);
+  }
   const newResponse = {
     status: "success",
     data: {
