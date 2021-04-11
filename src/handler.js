@@ -111,7 +111,7 @@ const getBooksByIdHandler = (request, h) => {
     return {
       status: "success",
       data: {
-        books,
+        indexBook,
       },
     };
   }
@@ -197,7 +197,7 @@ const deleteBooksByIdHandler = (request, h) => {
   const booksIndex = books.findIndex((book) => book.id === id);
 
   if (booksIndex !== -1) {
-    books.splice(index, 1);
+    books.splice(booksIndex, 1);
     const response = h.response({
       status: "success",
       message: "Buku berhasil dihapus",
